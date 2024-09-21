@@ -1,6 +1,7 @@
 # Vehicle Management Application
 
 This application provides an interactive map-based interface for managing a fleet of vehicles. It offers features for viewing, adding, and removing vehicles, as well as filtering them based on various criteria.
+![show maps and list of vehicles and filter box and popup a detail of vehicle](UI-Image.png)
 
 ## Features
 
@@ -36,12 +37,6 @@ This application provides an interactive map-based interface for managing a flee
 - The application uses lazy loading to efficiently fetch and display large sets of vehicle data.
 - React's `useMemo` hook is employed to optimize rendering performance, particularly for the vehicle list and map components.
 - Redux Toolkit is used for efficient state management, helping to maintain a clear and performant data flow throughout the application.
-
-## Future Enhancements
-
-- Implement real-time updates for vehicle locations
-- Add user authentication and role-based access control
-- Integrate with a backend service for persistent data storage
 
 ## Testing
 
