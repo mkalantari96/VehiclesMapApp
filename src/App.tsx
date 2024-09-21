@@ -1,11 +1,11 @@
 import "./App.css";
-import { Provider, useDispatch } from "react-redux";
-import { Store, vehicleAction } from "./store/store";
-import VehicleList from "./components/VehicleList";
-import { ShowMap } from "./components/ShowMap";
+import { Provider } from "react-redux";
+import { Store } from "./store/store";
 import AddButton from "./components/AddButton";
 import FilterButton from "./components/FilterButton";
-
+import { lazy, Suspense } from "react";
+const ShowMap = lazy(() => import("./components/ShowMap"));
+const VehicleList = lazy(() => import("./components/VehicleList"));
 function App() {
   return (
     <Provider store={Store}>
@@ -15,11 +15,21 @@ function App() {
           <FilterButton />
           <div className="bg-slate-100 px-2 py-4">
             <p className="text-center">Vehicles list</p>
-            <VehicleList />
+            <Suspense
+              fallback={
+                <div className="text-center">Loading Vehicle List...</div>
+              }
+            >
+              <VehicleList />
+            </Suspense>
           </div>
         </section>
         <section className="md:w-2/3 w-full h-1/2 md:h-full overflow-y-auto p-4">
-          <ShowMap />
+          <Suspense
+            fallback={<div className="text-center">Loading Map...</div>}
+          >
+            <ShowMap />
+          </Suspense>
         </section>
       </div>
     </Provider>

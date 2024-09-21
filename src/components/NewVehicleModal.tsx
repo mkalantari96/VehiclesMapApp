@@ -3,11 +3,14 @@ import { ChangeEvent } from "react";
 import { VehicleState, Vehicle } from "../types";
 import { vehicleAction } from "../store/store";
 
-export default function NewTaskModal({
+export default function NewVehicleModal({
   location,
 }: {
-  location: [number, number];
+  location: [number, number] | null;
 }) {
+  if (location === null) {
+    location = [0, 0];
+  }
   const startAddNewTask = useSelector(
     (state: VehicleState) => state.addNewVehicle
   );

@@ -11,7 +11,7 @@ const initialState: VehicleState = {
   showFilterBox: false,
 };
 
-const vehicleSlice = createSlice({
+export const vehicleSlice = createSlice({
   name: "vehicleSlice",
   initialState,
   reducers: {

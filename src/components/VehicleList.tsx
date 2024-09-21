@@ -22,22 +22,26 @@ export default function VehicleList() {
   }
 
   return (
-    <ul className="space-y-2 overflow-auto">
-      {content.map((vehicle) => (
-        <li
-          key={vehicle.vin}
-          className={`p-2 border rounded cursor-pointer hover:bg-gray-400 transition 
-          ${
-            vehicleState.selectedVehicle?.vin === vehicle.vin
-              ? "bg-blue-100"
-              : ""
-          }`}
-          onClick={() => handleClickItem(vehicle)}
-        >
-          <p className="font-bold">{vehicle.plate}</p>
-          <p className="text-sm">{vehicle.address}</p>
-        </li>
-      ))}
-    </ul>
+    <>
+      {content.length === 0 ? (
+        <p className="text-center text-red-400 mt-4">No vehicles found.</p>
+      ) : (
+        <ul className="space-y-2 overflow-auto">
+          {content.map((vehicle) => (
+            <li
+              key={vehicle.vin}
+              className={`p-2 border rounded cursor-pointer hover:bg-gray-400 transition 
+        ${
+          vehicleState.selectedVehicle?.vin === vehicle.vin ? "bg-blue-100" : ""
+        }`}
+              onClick={() => handleClickItem(vehicle)}
+            >
+              <p className="font-bold">{vehicle.plate}</p>
+              <p className="text-sm">{vehicle.address}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }

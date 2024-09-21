@@ -1,3 +1,5 @@
+import { useMemo, useCallback, useState, Suspense } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   MapContainer,
   Marker,
@@ -6,16 +8,14 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import iconImag from "../assets/locationTag.png";
-import { useDispatch, useSelector } from "react-redux";
-import { Vehicle, VehicleState } from "../types";
-import PopupContent from "./PopUpContent";
+import L from "leaflet";
+import NewVehicleModal from "./NewVehicleModal";
+import RemoveVehicleModal from "./RemoveVehicleModal";
+import { VehicleState, Vehicle } from "../types";
 import { vehicleAction } from "../store/store";
+import PopupContent from "./PopupContent";
 import ZoomToVehicle from "./ZoomToVehicle";
 import RestView from "./RestVeiw";
-import { useState } from "react";
-import L from "leaflet";
-import NewTaskModal from "./NewTaskModal";
-import RemoveVehicleModal from "./RemoveVehicleModal";
 
 const redIcon = new L.Icon({
   iconUrl: iconImag,
@@ -28,27 +28,38 @@ const redIcon = new L.Icon({
   shadowSize: [41, 41],
 });
 
-export function ShowMap() {
+export default function ShowMap() {
   const [location, setLocation] = useState<[number, number] | null>(null);
   const vehicleState = useSelector((state: VehicleState) => state);
   const dispatch = useDispatch();
-  let content: Vehicle[] =
-    (vehicleState.showFilterBox && vehicleState.filterdVehicle) ||
-    vehicleState.vehicles;
 
-  function handleClickMarker(vehicle: Vehicle) {
-    dispatch(vehicleAction.selectVehicle(vehicle));
-  }
+  const content = useMemo(
+    () =>
+      (vehicleState.showFilterBox && vehicleState.filterdVehicle) ||
+      vehicleState.vehicles,
+    [
+      vehicleState.showFilterBox,
+      vehicleState.filterdVehicle,
+      vehicleState.vehicles,
+    ]
+  );
 
-  function handleClickAdd() {
+  const handleClickMarker = useCallback(
+    (vehicle: Vehicle) => {
+      dispatch(vehicleAction.selectVehicle(vehicle));
+    },
+    [dispatch]
+  );
+
+  const handleClickAdd = useCallback(() => {
     dispatch(vehicleAction.showAddVehicleForm(true));
-  }
+  }, [dispatch]);
 
-  function handleClickRemove() {
+  const handleClickRemove = useCallback(() => {
     dispatch(vehicleAction.showRemoveVehicleForm(true));
-  }
+  }, [dispatch]);
 
-  const LocationSelector = () => {
+  const LocationSelector = useCallback(() => {
     useMapEvents({
       click(e) {
         setLocation([e.latlng.lat, e.latlng.lng]);
@@ -56,7 +67,7 @@ export function ShowMap() {
       },
     });
     return null;
-  };
+  }, []);
 
   return (
     <>
@@ -107,12 +118,14 @@ export function ShowMap() {
         </MapContainer>
       )}
 
-      {location && vehicleState.addNewVehicle && (
-        <NewTaskModal location={location} />
-      )}
-      {vehicleState.removeVehicle && vehicleState.selectedVehicle && (
-        <RemoveVehicleModal />
-      )}
+      <Suspense fallback={<div className="text-center">Loading...</div>}>
+        {(location || location === null) && vehicleState.addNewVehicle && (
+          <NewVehicleModal location={location} />
+        )}
+        {vehicleState.removeVehicle && vehicleState.selectedVehicle && (
+          <RemoveVehicleModal />
+        )}
+      </Suspense>
     </>
   );
 }

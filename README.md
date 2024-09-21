@@ -1,50 +1,61 @@
-# React + TypeScript + Vite
+# Vehicle Management Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This application provides an interactive map-based interface for managing a fleet of vehicles. It offers features for viewing, adding, and removing vehicles, as well as filtering them based on various criteria.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Interactive Map View**
 
-## Expanding the ESLint configuration
+   - Displays vehicles as markers on a map
+   - Clicking a marker shows a popup with detailed vehicle information
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. **Vehicle Management**
 
-- Configure the top-level `parserOptions` property like this:
+   - Add new vehicles by clicking on the map or using an "Add" button
+   - Remove existing vehicles by clicking on their markers
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+3. **Filtering Capabilities**
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+   - Filter vehicles by:
+     - VIN
+     - Plate number
+     - Charging status
+     - Availability for rental
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+4. **Performance Optimizations**
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+   - Implements lazy loading for efficient data fetching
+   - Utilizes `useMemo`, `useEffect` and `callBack`for optimized rendering of components
+   -
+
+5. **State Management**
+   - Uses Redux Toolkit for centralized state management
+
+## Performance Considerations
+
+- The application uses lazy loading to efficiently fetch and display large sets of vehicle data.
+- React's `useMemo` hook is employed to optimize rendering performance, particularly for the vehicle list and map components.
+- Redux Toolkit is used for efficient state management, helping to maintain a clear and performant data flow throughout the application.
+
+## Future Enhancements
+
+- Implement real-time updates for vehicle locations
+- Add user authentication and role-based access control
+- Integrate with a backend service for persistent data storage
+
+## Testing
+
+The application includes unit tests for critical functionality, including:
+
+- Adding new vehicles
+- Redux state management
+- Utility functions
+
+To run the tests, use the command `npm test`.
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`
+4. Run tests: `npm test`

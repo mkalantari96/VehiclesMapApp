@@ -1,10 +1,11 @@
 import { useDispatch } from "react-redux";
 import { vehicleAction } from "../store/store";
-import NewTaskModal from "./NewTaskModal";
+
 export default function AddButton() {
   const dispatch = useDispatch();
   function handleClickAdd() {
     dispatch(vehicleAction.showAddVehicleForm(true));
+    return;
   }
   return (
     <>
@@ -14,7 +15,6 @@ export default function AddButton() {
       >
         Add New Car
       </button>
-      <NewTaskModal location={[0, 0]} />
     </>
   );
 }
