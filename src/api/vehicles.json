@@ -1,0 +1,42 @@
+[
+  {
+    "vin": "WME4533421K088101",
+    "plate": "B-GO8135",
+    "geoCoordinate": {
+      "latitude": 53.5475425,
+      "longitude": 9.87362444
+    },
+    "fuelLevel": 59,
+    "address": "Holztwiete 25, 22605 Hamburg",
+    "locationAlias": "hamburg",
+    "locationId": 3,
+    "buildSeries": "C453",
+    "fuelType": "GASOLINE",
+    "primaryColor": "EN3U",
+    "secondaryColor": "EAZO",
+    "charging": false,
+    "freeForRental": true,
+    "hardwareVersion": "HW3",
+    "globalVersion": 471619311
+  },
+  {
+    "vin": "WME4533421K065109",
+    "plate": "B-GO4284",
+    "geoCoordinate": {
+      "latitude": 53.47195778,
+      "longitude": 9.92125389
+    },
+    "fuelLevel": 100,
+    "address": "Am Radeland 124, 21079 Hamburg",
+    "locationAlias": "hamburg",
+    "locationId": 3,
+    "buildSeries": "C453",
+    "fuelType": "GASOLINE",
+    "primaryColor": "EN2U",
+    "secondaryColor": "EAZO",
+    "charging": false,
+    "freeForRental": true,
+    "hardwareVersion": "HW3",
+    "globalVersion": 471828135
+  }
+]
